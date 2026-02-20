@@ -1,0 +1,14 @@
+version: "3.9"
+
+services:
+  php:
+    build:
+      context: .
+      dockerfile: .Dockerfile
+    container_name: php-WiQ
+    working_dir: /app
+    volumes:
+      - ./:/app
+    ports:
+      - "8080:8080"
+    command: php -S 0.0.0.0:8080 server.php
