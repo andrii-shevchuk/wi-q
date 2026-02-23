@@ -5,7 +5,6 @@ namespace WiQ\Infrastructure\Repository;
 use WiQ\Domain\Models\Product;
 use WiQ\Domain\Repository\ProductRepositoryInterface;
 use WiQ\Infrastructure\Client\ApiGreatFoodClient;
-use WiQ\Infrastructure\Client\Exception\ApiException;
 
 readonly class ProductRepository implements ProductRepositoryInterface
 {
@@ -23,7 +22,7 @@ readonly class ProductRepository implements ProductRepositoryInterface
 
         $menuProducts = $this->client->getMenuProducts($menuId);
 
-        foreach ($menuProducts[0] as $menuProduct) {
+        foreach ($menuProducts['data'] as $menuProduct) {
             $productModels[] = new Product($menuProduct['id'], $menuProduct['name']);
         }
 

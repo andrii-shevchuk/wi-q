@@ -2,6 +2,8 @@
 
 namespace WiQ\Application\UseCase\GetTakeawayProductList;
 
+use WiQ\Application\UseCase\GetTakeawayProductList\Exception\MenuNotFoundException;
+use WiQ\Domain\Models\Menu;
 use WiQ\Domain\Models\Product;
 use WiQ\Domain\Repository\MenuRepositoryInterface;
 use WiQ\Domain\Repository\ProductRepositoryInterface;
@@ -19,6 +21,7 @@ readonly class GetTakeawayProductList
      * @return Product[]
      *
      * @throws ApiException
+     * @throws MenuNotFoundException
      */
     public function execute(): array
     {
@@ -32,6 +35,10 @@ readonly class GetTakeawayProductList
 
                 break;
             }
+        }
+
+        if (!$takeawayMenu instanceof Menu) {
+            throw new MenuNotFoundException('Menu "Takeaway" isn\'t found');
         }
 
         return $this->productRepository->findByMenuId($takeawayMenu->id);

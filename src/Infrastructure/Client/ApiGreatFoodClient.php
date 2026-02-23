@@ -30,7 +30,7 @@ class ApiGreatFoodClient
     {
         try {
             $response = $this->http->post('auth_token', [
-                'json' => [
+                'form_params' => [
                     'client_secret' => $this->config->clientSecret,
                     'client_id' => $this->config->clientId,
                     'grant_type' => $this->config->grantType

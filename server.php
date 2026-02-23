@@ -66,9 +66,9 @@ if (preg_match('#^/menu/(\d+)/products$#', $uri, $m) && $method === 'GET') {
     $menuId = (int)$m[1];
 
     // If products contain menu_id → filter
-    $filtered = array_values(array_filter($products, function ($p) use ($menuId) {
+    $filtered = array_filter($products, function ($p) use ($menuId) {
         return !isset($p['menu_id']) || $p['menu_id'] == $menuId;
-    }));
+    });
 
     sendJson($filtered);
 }

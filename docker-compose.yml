@@ -11,4 +11,9 @@ services:
       - ./:/app
     ports:
       - "8080:8080"
+    environment:
+      CLIENT_SECRET: 4j3g4gj304gj3
+      CLIENT_ID: 1337
+      GRANT_TYPE: client_credentials
+      BASE_URL: http://php:8080
     command: php -S 0.0.0.0:8080 server.php
