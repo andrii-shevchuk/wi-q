@@ -2,17 +2,17 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+use DI\ContainerBuilder;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Serializer;
 use Symfony\Component\Serializer\SerializerInterface;
-use WiQ\Application\UseCase\GetTakeawayProductList\GetProductList;
+use WiQ\Application\UseCase\GetProductList\GetProductList;
 use WiQ\Domain\Repository\MenuRepositoryInterface;
 use WiQ\Domain\Repository\ProductRepositoryInterface;
 use WiQ\Infrastructure\Client\ApiGreatFoodClient;
-use WiQ\Infrastructure\Repository\ProductRepository;
 use WiQ\Infrastructure\Repository\MenuRepository;
-use DI\ContainerBuilder;
-use Symfony\Component\Serializer\Serializer;
-use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
-use Symfony\Component\Serializer\Encoder\JsonEncoder;
+use WiQ\Infrastructure\Repository\ProductRepository;
 
 $builder = new ContainerBuilder();
 

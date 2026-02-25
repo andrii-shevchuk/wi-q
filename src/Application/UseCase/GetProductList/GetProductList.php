@@ -1,8 +1,8 @@
 <?php
 
-namespace WiQ\Application\UseCase\GetTakeawayProductList;
+namespace WiQ\Application\UseCase\GetProductList;
 
-use WiQ\Application\UseCase\GetTakeawayProductList\Exception\MenuNotFoundException;
+use WiQ\Application\UseCase\GetProductList\Exception\MenuNotFoundException;
 use WiQ\Domain\Models\Menu;
 use WiQ\Domain\Models\Product;
 use WiQ\Domain\Repository\MenuRepositoryInterface;

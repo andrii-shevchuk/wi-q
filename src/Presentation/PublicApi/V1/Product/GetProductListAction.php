@@ -2,10 +2,10 @@
 
 namespace WiQ\Presentation\PublicApi\V1\Product;
 
-use Symfony\Component\HttpFoundation\Response;
-use WiQ\Application\UseCase\GetTakeawayProductList\Exception\MenuNotFoundException;
-use WiQ\Application\UseCase\GetTakeawayProductList\GetProductList;
 use Symfony\Component\HttpFoundation\JsonResponse;
+use Symfony\Component\HttpFoundation\Response;
+use WiQ\Application\UseCase\GetProductList\Exception\MenuNotFoundException;
+use WiQ\Application\UseCase\GetProductList\GetProductList;
 use WiQ\Presentation\PublicApi\V1\Model\ProductResponseModel;
 
 class GetProductListAction
