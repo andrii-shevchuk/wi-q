@@ -97,7 +97,7 @@ Please zip up or send via gitrep your solution
 
 ```make build``` - Build env
 
-```make server-bg``` - Run API server
+```make up-bg``` - Run API server
 
 ```make composer-install``` - Install vendors
 
