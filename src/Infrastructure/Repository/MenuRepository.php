@@ -11,6 +11,7 @@ readonly class MenuRepository implements MenuRepositoryInterface
     public function __construct(
         private ApiGreatFoodClient $client
     ) {
+        $this->client->getAuthToken();
     }
 
     /**

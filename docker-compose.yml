@@ -4,8 +4,8 @@ services:
   php:
     build:
       context: .
-      dockerfile: .Dockerfile
-    container_name: php-WiQ
+      dockerfile: Dockerfile
+    container_name: php-wiq
     working_dir: /app
     volumes:
       - ./:/app
@@ -15,5 +15,16 @@ services:
       CLIENT_SECRET: 4j3g4gj304gj3
       CLIENT_ID: 1337
       GRANT_TYPE: client_credentials
-      BASE_URL: http://php:8080
-    command: php -S 0.0.0.0:8080 server.php
+      BASE_URL: http://wiremock:8080
+    depends_on:
+      - wiremock
+    command: php -S 0.0.0.0:8080 -t /app/public
+
+  wiremock:
+    image: wiremock/wiremock:latest
+    container_name: wiremock-wiq
+    ports:
+      - "8081:8080"
+    volumes:
+      - ./wiremock:/home/wiremock
+    command: ["--verbose", "--global-response-templating"]

@@ -9,7 +9,7 @@ use WiQ\Domain\Repository\MenuRepositoryInterface;
 use WiQ\Domain\Repository\ProductRepositoryInterface;
 use WiQ\Infrastructure\Client\Exception\ApiException;
 
-readonly class GetTakeawayProductList
+readonly class GetProductList
 {
     public function __construct(
         private MenuRepositoryInterface $menuRepository,
@@ -23,24 +23,24 @@ readonly class GetTakeawayProductList
      * @throws ApiException
      * @throws MenuNotFoundException
      */
-    public function execute(): array
+    public function execute(string $menuName): array
     {
-        $takeawayMenu = null;
+        $needMenu = null;
 
         $menus = $this->menuRepository->findAll();
 
         foreach ($menus as $menu) {
-            if ($menu->name === 'Takeaway') {
-                $takeawayMenu = $menu;
+            if (mb_strtolower($menu->name) === mb_strtolower($menuName)) {
+                $needMenu = $menu;
 
                 break;
             }
         }
 
-        if (!$takeawayMenu instanceof Menu) {
-            throw new MenuNotFoundException('Menu "Takeaway" isn\'t found');
+        if (!$needMenu instanceof Menu) {
+            throw new MenuNotFoundException(sprintf('Menu "%s" isn\'t found', $menuName));
         }
 
-        return $this->productRepository->findByMenuId($takeawayMenu->id);
+        return $this->productRepository->findByMenuId($needMenu->id);
     }
 }

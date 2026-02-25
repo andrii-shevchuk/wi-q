@@ -16,17 +16,17 @@ run:
 	docker-compose run --rm $(PHP_SERVICE) php $(SCRIPT)
 
 # -----------------------------
-# Run PHP mock server (server.php) in foreground
+# Run PHP server
 # -----------------------------
-server:
-	@echo "Starting PHP mock server on http://localhost:8080 ..."
+up:
+	@echo "Starting PHP server on http://localhost:8080 ..."
 	docker-compose up $(PHP_SERVICE)
 
 # -----------------------------
-# Run PHP mock server in background (detached)
+# Run PHP server in background (detached)
 # -----------------------------
-server-bg:
-	@echo "Starting PHP mock server in background on http://localhost:8080 ..."
+up-bg:
+	@echo "Starting server in background on http://localhost:8080 ..."
 	docker-compose up -d $(PHP_SERVICE)
 
 # -----------------------------

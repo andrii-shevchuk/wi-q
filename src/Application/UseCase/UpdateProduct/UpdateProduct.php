@@ -16,13 +16,10 @@ readonly class UpdateProduct
     /**
      * @throws ApiException
      */
-    public function execute(): Product
+    public function execute(int $menuId, int $productId, string $name): Product
     {
-        $needMenuId = 7;
-        $needProductId = 84;
+        $product = new Product($menuId, $name);
 
-        $product = new Product($needMenuId, 'Chips');
-
-        return $this->productRepository->update($needMenuId, $needProductId, $product);
+        return $this->productRepository->update($menuId, $productId, $product);
     }
 }

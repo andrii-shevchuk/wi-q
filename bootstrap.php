@@ -2,14 +2,35 @@
 
 require __DIR__ . '/vendor/autoload.php';
 
+use Symfony\Component\Serializer\SerializerInterface;
+use WiQ\Application\UseCase\GetTakeawayProductList\GetProductList;
+use WiQ\Domain\Repository\MenuRepositoryInterface;
+use WiQ\Domain\Repository\ProductRepositoryInterface;
 use WiQ\Infrastructure\Client\ApiGreatFoodClient;
 use WiQ\Infrastructure\Repository\ProductRepository;
 use WiQ\Infrastructure\Repository\MenuRepository;
+use DI\ContainerBuilder;
+use Symfony\Component\Serializer\Serializer;
+use Symfony\Component\Serializer\Normalizer\ObjectNormalizer;
+use Symfony\Component\Serializer\Encoder\JsonEncoder;
 
-$client = new ApiGreatFoodClient();
-$client->getAuthToken();
+$builder = new ContainerBuilder();
 
-return [
-    'productRepository' => new ProductRepository($client),
-    'menuRepository' => new MenuRepository($client),
-];
+
+$builder->addDefinitions([
+    ApiGreatFoodClient::class => DI\create(ApiGreatFoodClient::class),
+    ProductRepositoryInterface::class => DI\autowire(ProductRepository::class)
+        ->constructorParameter('client', DI\get(ApiGreatFoodClient::class)),
+    MenuRepositoryInterface::class => DI\autowire(MenuRepository::class)
+        ->constructorParameter('client', DI\get(ApiGreatFoodClient::class)),
+    GetProductList::class => DI\autowire(GetProductList::class),
+    SerializerInterface::class => function () {
+        $normalizers = [new ObjectNormalizer()];
+        $encoders = [new JsonEncoder()];
+        return new Serializer($normalizers, $encoders);
+    },
+]);
+
+$container = $builder->build();
+
+return $container;

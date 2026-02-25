@@ -1,0 +1,18 @@
+{
+  "request": {
+    "method": "GET",
+    "url": "/menus",
+    "headers": {
+      "Authorization": {
+        "matches": "Bearer .*"
+      }
+    }
+  },
+  "response": {
+    "status": 200,
+    "bodyFileName": "menus.json",
+    "headers": {
+      "Content-Type": "application/json"
+    }
+  }
+}

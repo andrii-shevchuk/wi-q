@@ -11,6 +11,7 @@ readonly class ProductRepository implements ProductRepositoryInterface
     public function __construct(
         private ApiGreatFoodClient $client
     ) {
+        $this->client->getAuthToken();
     }
 
     /**

@@ -104,26 +104,55 @@ Please zip up or send via gitrep your solution
 ## RUN
 
 ### Scenario 1
-```make run SCRIPT=src/Presentation/Command/GetTakeawayProductListCommand.php```
+```GET http://localhost:8080/v1/menu/takeaway/products```
+#### Response 200
 ```
-+----+--------------+
-| ID | Name         |
-+----+--------------+
-| 1  | Large Pizza  |
-| 2  | Medium Pizza |
-| 3  | Burger       |
-| 4  | Chips        |
-| 5  | Soup         |
-| 6  | Salad        |
-+----+--------------+
+{
+    "data": [
+        {
+            "id": "1",
+            "name": "Large Pizza"
+        },
+        {
+            "id": "2",
+            "name": "Medium Pizza"
+        },
+        {
+            "id": "3",
+            "name": "Burger"
+        },
+        {
+            "id": "4",
+            "name": "Chips"
+        },
+        {
+            "id": "5",
+            "name": "Soup"
+        },
+        {
+            "id": "6",
+            "name": "Salad"
+        }
+    ]
+}
 ```
 ### Scenario 2
-```make run SCRIPT=src/Presentation/Command/UpdateProductCommand.php```
+```PUT http://localhost:8080/v1/menu/7/products/84```
+#### Body:
 ```
-+----+-------+
-| ID | Name  |
-+----+-------+
-| 84 | Chips |
-+----+-------+
+{
+    "name": "Chips"
+}
+```
+#### Response 200
+```
+{
+    "data": [
+        {
+            "id": "84",
+            "name": "Chips"
+        }
+    ]
+}
 ```
 ```make test```
